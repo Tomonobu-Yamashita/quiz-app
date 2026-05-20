@@ -1,32 +1,43 @@
-# quiz-app
+# task-board
 
-一般常識クイズアプリ。HTML/CSS/JavaScriptのみで構成するフロントエンド完結型のWebアプリ。
+チェックボックスで完了管理できるタスクボードアプリ。React + Vite 構成のフロントエンド完結型 Web アプリ。タスクは localStorage に永続化される。
 
 ## 技術スタック
 
-- HTML5
-- CSS3
-- JavaScript（バニラ、フレームワークなし）
+- React 18（状態管理・UI コンポーネント）
+- Vite 5（ビルドツール・開発サーバー）
+- CSS（フレームワークなし、plain CSS）
+- localStorage（タスクの永続化）
 
-## プロジェクト構成（想定）
+## プロジェクト構成
 
 ```
-quiz-app/
+task-board/
 ├── CLAUDE.md
-├── index.html       # エントリポイント
-├── css/
-│   └── style.css
-├── js/
-│   └── app.js
-└── data/
-    └── questions.js # クイズ問題データ
+├── index.html                  # Vite エントリポイント
+├── vite.config.js
+├── package.json
+├── src/
+│   ├── main.jsx                # React ルート
+│   ├── App.jsx                 # メインコンポーネント
+│   └── App.css                 # スタイル
+└── .github/
+    └── workflows/
+        └── deploy.yml          # GitHub Pages 自動デプロイ
 ```
 
-## クイズ仕様
+## コンポーネント命名規約
 
-- ジャンル: 一般常識（歴史・地理・理科・社会など）
-- 問題形式: 4択
-- 問題データは `data/questions.js` に集約して管理する
+- **コンポーネント名・ファイル名**: PascalCase（例: `App.jsx`, `TaskItem.jsx`）
+- **CSS ファイル**: コンポーネントと同名（例: `App.css`, `TaskItem.css`）
+- **カスタムフック**: `use` プレフィックス + camelCase（例: `useLocalStorage.js`）
+- **イベントハンドラ**: `handle` プレフィックス + camelCase（例: `handleKeyDown`, `handleDelete`）
+- **props**: camelCase（例: `onToggle`, `onDelete`）
+
+## デプロイ先
+
+- URL: https://omonobu-yamashita.github.io/task-board/
+- `main` ブランチへの push で GitHub Actions が自動ビルド＆デプロイ
 
 ## GitHub リポジトリ
 
@@ -53,9 +64,8 @@ quiz-app/
 
 ## コーディング規約
 
-- バックエンド・ビルドツール・npm は使用しない（ブラウザで直接開けること）
 - インデントはスペース2文字
-- 文字コードはUTF-8
-- コメントは日本語で記述
+- 文字コードは UTF-8
 - `var` は使用しない（`const` / `let` を使用）
-- セキュリティ上の脆弱性（XSS等）を導入しないこと
+- コメントは原則不要。WHY が非自明な場合のみ日本語で1行
+- セキュリティ上の脆弱性（XSS 等）を導入しないこと
